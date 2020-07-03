@@ -1,4 +1,4 @@
-"""appList URL Configuration
+"""turistico URL Configuration
 
 The `urlpatterns` list routes URLs to views. For more information please see:
     https://docs.djangoproject.com/en/3.0/topics/http/urls/
@@ -14,16 +14,22 @@ Including another URLconf
     2. Add a URL to urlpatterns:  path('blog/', include('blog.urls'))
 """
 from django.contrib import admin
-from django.urls import path, include 
+from django.urls import path
+from travello.views import index,about,contact
+from accounts.views import register,login,logout
 from django.conf import settings
 from django.conf.urls.static import static
-from travello.views import index
 
 urlpatterns = [
-	#path('travello', include('travello.urls')),
-    path('', index,name="index"),
-    path('admin/', admin.site.urls)
-    #path('accounts/',include('accounts.urls')),
+    path('admin/', admin.site.urls),
+    #path('travello/',include('travello.urls'))
+    path('',index,name="index"),
+    path('about/',about,name="about"),
+    path('contact/',contact,name="contact"),
+    #path('accounts/',include('accounts.urls'))
+    path('accounts/register',register,name="register"),
+    path('accounts/login',login,name="login"),
+    path('accounts/logout',logout,name="logout")
 ]
 
-urlpatterns = urlpatterns+static(settings.MEDIA_URL, document_root = settings.MEDIA_ROOT)
+urlpatterns = urlpatterns + static(settings.MEDIA_URL,document_root=settings.MEDIA_ROOT)
